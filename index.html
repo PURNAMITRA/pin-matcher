@@ -59,7 +59,7 @@
         var calc_input=document.getElementById("calculator_input");
         document.getElementById("generate_random_pin").addEventListener("click",function(){
             pin_input.value=Math.floor((Math.random()*9000)+1000);
-        })
+        });
         function getInput(input){
             calc_input.value+=input;
         }
@@ -71,6 +71,26 @@
                 calc_input.value=(calc_input.value).slice(0,(calc_input.value).length-1)
             }
         }
+        var input_try=document.getElementById("input_try").innerText;
+        document.getElementById("submit").addEventListener("click",function(){
+            if (pin_input.value==calc_input.value){
+                document.getElementById("pin_matched").style.display='block';
+                document.getElementById("pin_not_matched").style.display='none';
+                document.getElementById("input_try_count").style.display='none';
+            }
+            else{
+                document.getElementById("pin_matched").style.display='none';
+                document.getElementById("pin_not_matched").style.display='block';
+
+                input_try--;
+                document.getElementById('input_try').innerText=input_try;
+                if(parseInt(input_try)<1){
+                    document.getElementById("submit").disabled=true;
+                    document.getElementById("submit").style.backgroundColor="gray";
+                    document.getElementById("input_try_count").style.display="none";
+                }
+            }
+        });
     </script>
 </body>
 </html>
